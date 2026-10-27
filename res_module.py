@@ -1,2 +1,7 @@
-from cryptography.hazmat.primitives.asymmetric import rsa
-key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+from cryptography.hazmat.primitives.asymmetric import mldsa
+
+key = mldsa.MLDSA65PrivateKey.generate()
+public_key = key.public_key()
+
+signature = key.sign(b"message")
+public_key.verify(signature, b"message")
